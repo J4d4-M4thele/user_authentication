@@ -39,13 +39,13 @@ const Login = () => {
         { withCredentials: true }
       );
       console.log(data);
-      const {success, message} = data;
-      if(success) {
+      const { success, message } = data;
+      if (success) {
         handleSuccess(message);
         setTimeout(() => {
           navigate('/');
         }, 1000);
-      }else {
+      } else {
         handleError(message);
       }
     } catch (error) {
@@ -81,7 +81,9 @@ const Login = () => {
             onChange={handleOnChange}
           />
         </div>
-        <button type="submit">Submit</button>
+        <Link to={'/'}>
+          <button type="submit">Submit</button>
+        </Link>
         <span>
           Don't have an account? <Link to={"/signup"}>Signup</Link>
         </span>
