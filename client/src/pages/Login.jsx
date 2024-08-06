@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css'; // Import Toastify CSS
 
 const Login = () => {
   const navigate = useNavigate();
@@ -38,7 +39,6 @@ const Login = () => {
         { ...inputValue },
         { withCredentials: true }
       );
-      console.log(data);
       const { success, message } = data;
       if (success) {
         handleSuccess(message);
@@ -49,14 +49,14 @@ const Login = () => {
         handleError(message);
       }
     } catch (error) {
-      console.log(error);
+      handleError(error.response?.data?.message || "An error occurred");
     }
     setInputValue({
-      ...inputValue,
       email: "",
       password: ""
     });
   };
+
   return (
     <div className="form_container">
       <h2>Login Account</h2>
@@ -81,16 +81,16 @@ const Login = () => {
             onChange={handleOnChange}
           />
         </div>
-        <Link to={'/'}>
-          <button type="submit">Submit</button>
+        <Link to='/'>
+        <button type="submit">Submit</button>
         </Link>
         <span>
-          Don't have an account? <Link to={"/signup"}>Signup</Link>
+          Don't have an account? <Link to="/signup">Signup</Link>
         </span>
       </form>
       <ToastContainer />
     </div>
-  )
+  );
 }
 
-export default Login
+export default Login;
